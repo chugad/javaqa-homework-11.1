@@ -3,7 +3,13 @@ package ru.netology.manager;
 import ru.netology.domain.MoviesList;
 
 public class MovieManager {
+    int movieNumber = 10;
+
     private MoviesList[] movies = new MoviesList[0]; //массив с фильмами которые мы будем добавлять, сначала длина 0
+
+    public MovieManager() {
+        this.movieNumber = movieNumber;
+    }
 
     public void add(MoviesList index) { //добавляем новые фильмы
         // создаём новый массив размером на единицу больше
@@ -23,7 +29,7 @@ public class MovieManager {
 
     public MoviesList[] getLastTenMovies() {
         int length = movies.length;
-        if (length < 10) {
+        if (length < this.movieNumber) {
             MoviesList[] result = new MoviesList[movies.length];
             // перебираем массив в прямом порядке
             // но кладём в результаты в обратном
@@ -33,7 +39,7 @@ public class MovieManager {
             }
             return result;
         } else {
-            MoviesList[] result = new MoviesList[10];
+            MoviesList[] result = new MoviesList[this.movieNumber];
             // перебираем массив в прямом порядке
             // но кладём в результаты в обратном
             for (int i = 0; i < result.length; i++) {
