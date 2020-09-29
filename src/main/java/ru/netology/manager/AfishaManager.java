@@ -2,35 +2,29 @@ package ru.netology.manager;
 
 import ru.netology.domain.MoviesList;
 
-public class MovieManager {
+public class AfishaManager {
     int movieNumber = 10;
 
-    private MoviesList[] movies = new MoviesList[0]; //массив с фильмами которые мы будем добавлять, сначала длина 0
+    private AfishaRepository repository;
 
-    public MovieManager() {
+    public  AfishaManager (AfishaRepository repository) {
+        this.repository = repository;
+    }
+
+    public AfishaManager (int movieNumber) {
         this.movieNumber = movieNumber;
     }
 
-    public void add(MoviesList index) { //добавляем новые фильмы
-        // создаём новый массив размером на единицу больше
-        int length = movies.length + 1;
-        MoviesList[] tmp = new MoviesList[length];
-        // itar + tab
-        // копируем поэлементно
-        // for (int i = 0; i < items.length; i++) {
-        //   tmp[i] = items[i];
-        // }
-        System.arraycopy(movies, 0, tmp, 0, movies.length);
-        // кладём последним наш элемент
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = index;
-        movies = tmp;
+    public void add(MoviesList index) {
+        repository.save(index);
     }
 
-    public MoviesList[] getLastTenMovies() {
+    public MoviesList[] getAll() {
+        MoviesList[] movies = repository.findAll();
         int length = movies.length;
         if (length < this.movieNumber) {
             MoviesList[] result = new MoviesList[movies.length];
+
             // перебираем массив в прямом порядке
             // но кладём в результаты в обратном
             for (int i = 0; i < result.length; i++) {
