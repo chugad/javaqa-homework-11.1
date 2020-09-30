@@ -54,17 +54,12 @@ public class AfishaRepository {
 
 
     public MoviesList findById(int id) {
-        int i = 1;
-        for (MoviesList index : movies) {
-            if (i == id) {
-                movies[i] = index;
-            break;
-            } else {
-                i++;
+        for (MoviesList movie : movies) {
+            if (movie.getMovieId() == id) {
+                return movie;
             }
-            }
-        return movies[i];
-
+        }
+        return null;
     }
 
 }
